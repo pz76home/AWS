@@ -1,0 +1,19 @@
+---
+- hosts: local
+
+  tasks:
+
+  - name: httpd configuration
+    template:
+      src: /root/files/httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+
+  - name: nginx main configuration
+    template:
+      src: /root/files/nginx.conf
+      dest: /etc/nginx/nginx.conf
+
+  - name: nginx configuration
+    template:
+      src: /root/files/default.conf
+      dest: /etc/nginx/conf.d/default.conf
