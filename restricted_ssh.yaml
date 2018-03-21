@@ -1,0 +1,19 @@
+---
+- name: Change instance security group to restrict ssh
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  vars:
+   region: ap-southeast-2
+   eni_id: eni-f52557df
+   security_groups: sg-ba04dede
+
+  tasks:
+
+   - name: Change Instance for wordpress
+     local_action: ec2_eni
+                   region={{ region }}
+                   eni_id={{ eni_id }}
+                   security_groups={{ security_groups }}
+     register: ec2_eni
