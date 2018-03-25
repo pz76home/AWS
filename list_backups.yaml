@@ -1,0 +1,16 @@
+---
+- name: List AMI backups
+  hosts: local
+  connection: local
+
+  vars:
+   region: ap-southeast-2
+   name_ami: "*"
+
+  tasks:
+
+   - name: List backups
+     ec2_ami_find:
+       name: "{{ name_ami }}"
+       region: "{{ region }}"
+       owner: self

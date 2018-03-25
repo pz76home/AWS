@@ -1,0 +1,21 @@
+---
+- name: Create adhoc AMI backup
+  hosts: local
+  connection: local
+  gather_facts: True
+
+  vars:
+   region: ap-southeast-2
+   instance: i-0e379258518f6b8bf
+
+  tasks:
+
+  - name: Set time
+    set_fact: temp="{{lookup('pipe','date \"+%Y-%m-%d\"')}}"
+
+  - name: Create backup
+    local_action: ec2_ami
+     region={{ region }}
+     instance_id={{ instance  }}
+     name="Backup_{{ temp }}"
+    register: image
