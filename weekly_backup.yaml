@@ -27,7 +27,7 @@
      when: ami_find.results | length and ami_find.results[0].state == 'available'
 
    - pause:
-      minutes: 2
+      minutes: 5
 
    - name: Create backup
      local_action: ec2_ami
