@@ -6,11 +6,17 @@
   vars:
    region: ap-southeast-2
    name_ami: "*"
+   owner_ami: self
 
   tasks:
 
    - name: List backups
      ec2_ami_find:
-       name: "{{ name_ami }}"
        region: "{{ region }}"
-       owner: self
+       name: "{{ name_ami }}"
+       owner: "{{ owner_ami }}"
+     register: ami_find
+
+   - name: List AMI images
+     debug:
+       msg: "{{ ami_find | json_query('results[].name') }}"

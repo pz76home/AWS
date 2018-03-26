@@ -1,0 +1,27 @@
+---
+- name: Delete AMI backup
+  hosts: local
+  connection: local
+  gather_facts: False
+
+  vars:
+   region: ap-southeast-2
+   instance: i-0e379258518f6b8bf
+   image_name:
+
+  tasks:
+
+   - name: Resolve AMI id
+     ec2_ami_find:
+       region: "{{ region }}"
+       name: "{{ image_name }}"
+     register: ami_find
+
+   - name: Delete previous backup
+     local_action: ec2_ami
+                   region={{ region }}
+                   image_id={{ ami_find.results[0].ami_id }}
+                   delete_snapshot=True
+                   wait=yes
+                   state=absent
+     when: ami_find.results | length and ami_find.results[0].state == 'available'
