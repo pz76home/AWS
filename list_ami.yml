@@ -1,0 +1,24 @@
+---
+- name: List AMI backup
+  hosts: local
+  connection: local
+  gather_facts: True
+
+  vars:
+   region: ap-southeast-2
+   name_ami: "*"
+   owner_ami: self
+
+  tasks:
+
+   - name: Resolve AMI id
+     ec2_ami_facts:
+      region: "{{ region }}"
+      owners: "{{ owner_ami }}"
+      filters:
+        name: "{{ name_ami }}"
+     register: ami_find
+
+   - name: List AMI images
+     debug:
+      msg: "{{ ami_find | json_query('images[].name') }}"
