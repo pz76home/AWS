@@ -1,6 +1,6 @@
 ---
 - name: Create weekly AMI backup
-  hosts: local
+  hosts: localhost
   connection: local
   gather_facts: False
 

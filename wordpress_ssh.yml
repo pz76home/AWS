@@ -1,6 +1,6 @@
 ---
 - name: Change instance security group for wordpress
-  hosts: local
+  hosts: localhost
   connection: local
   gather_facts: false
 

@@ -1,6 +1,6 @@
 ---
 - name: Create adhoc AMI backup
-  hosts: local
+  hosts: localhost
   connection: local
   gather_facts: True
 

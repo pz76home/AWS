@@ -1,6 +1,6 @@
 ---
 - name: Change instance security group to restrict ssh
-  hosts: local
+  hosts: localhost
   connection: local
   gather_facts: false
 

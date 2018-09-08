@@ -1,6 +1,6 @@
 ---
 - name: List AMI backups
-  hosts: local
+  hosts: localhost
   connection: local
 
   vars:
