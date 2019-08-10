@@ -1,0 +1,155 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": null,
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/wordpress",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        },
+        {
+          "hostPort": 443,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 256,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [
+        {
+          "readOnly": null,
+          "containerPath": "/var/www/html",
+          "sourceVolume": "efs-nw"
+        },
+        {
+          "readOnly": null,
+          "containerPath": "/usr/local/etc/php/conf.d/uploads.ini",
+          "sourceVolume": "efs-cfg"
+        }
+      ],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 400,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "wordpress:latest",
+      "startTimeout": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "wordpress"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "450",
+  "taskRoleArn": null,
+  "compatibilities": [
+    "EC2"
+  ],
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:713172604789:task-definition/wordpress:17",
+  "family": "wordpress",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.docker-plugin.local"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+    }
+  ],
+  "pidMode": null,
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "networkMode": "bridge",
+  "cpu": "512",
+  "revision": 17,
+  "status": "ACTIVE",
+  "proxyConfiguration": null,
+  "volumes": [
+    {
+      "name": "efs-nw",
+      "host": null,
+      "dockerVolumeConfiguration": {
+        "autoprovision": true,
+        "labels": null,
+        "scope": "shared",
+        "driver": "local",
+        "driverOpts": {
+          "type": "nfs",
+          "device": ":/",
+          "o": "addr=fs-123abc45.efs.ap-southeast-2.amazonaws.com,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
+        }
+      }
+    },
+    {
+      "name": "efs-cfg",
+      "host": null,
+      "dockerVolumeConfiguration": {
+        "autoprovision": true,
+        "labels": null,
+        "scope": "shared",
+        "driver": "local",
+        "driverOpts": {
+          "type": "nfs",
+          "device": ":/",
+          "o": "addr=fs-12345abc.efs.ap-southeast-2.amazonaws.com,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
+        }
+      }
+    }
+  ]
+}
